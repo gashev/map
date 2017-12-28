@@ -1,0 +1,37 @@
+#!/usr/bin/python
+
+import json
+import os
+import os.path
+import sys
+
+configFile = os. environ['HOME'] + '/.map'
+
+def main():
+    command = sys.argv[1]
+    name = sys.argv[2]
+    value = None
+    if len(sys.argv) == 4:
+        value = sys.argv[3]
+
+    data = {}
+    if os.path.exists(configFile):
+        data = json.load(open(configFile))  
+    
+    if command == 'add':
+        if name not in data:
+            data[name] = []
+        if value not in data[name]:
+            data[name].append(value)
+        print ' '.join(data[name])
+
+    if command == 'destroy':
+        if name in data:
+            data.pop(name)
+
+    with open(configFile, 'wt') as outfile:
+        json.dump(data, outfile, sort_keys=True, indent=4, separators=(',', ': '))
+
+
+if __name__== "__main__":
+    main()
