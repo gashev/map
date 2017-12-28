@@ -25,6 +25,10 @@ def main():
             data[name].append(value)
         print ' '.join(data[name])
 
+    if command == 'delete':
+        if name in data and value in data[name]:
+            data[name].remove(value)
+
     if command == 'destroy':
         if name in data:
             data.pop(name)
