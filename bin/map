@@ -17,6 +17,7 @@ def help():
     print "  add      add item to list"
     print "  delete   delete item from list"
     print "  destroy  destroy list"
+    print "  show     show details about list"
 
 def main():
     command = sys.argv[1]
@@ -46,6 +47,9 @@ def main():
         if name in data:
             data.pop(name)
 
+    if command == 'show':
+        print ' '.join(data[name])
+        
     if command == 'help':
         help()
 
