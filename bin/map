@@ -25,6 +25,18 @@ def add(data, args):
             data[name].append(value)
     print(' '.join(data[name]))
 
+def delete(data, args):
+    name = args[2]
+    if name not in data:
+        return
+
+    values = args[3:]
+    for value in values:
+        if value in data[name]:
+            data[name].remove(value)
+
+    print(' '.join(data[name]))
+
 def export(data):
     for key in data:
         print("declare -x %s=\"%s\"" % (key, ' '.join(data[key])))
@@ -55,8 +67,7 @@ def main():
         add(data, sys.argv)
 
     if command == 'delete':
-        if name in data and value in data[name]:
-            data[name].remove(value)
+        delete(data, sys.argv)
 
     if command == 'destroy':
         if name in data:
