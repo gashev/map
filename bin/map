@@ -68,15 +68,30 @@ def show(args):
     print(' '.join(data[name]))
 
 def readConfig():
-    data = {}
-    if os.path.exists(configFile):
-        data = json.load(open(configFile))
+    try:
+        data = {}
+        if os.path.exists(configFile):
+            data = json.load(open(configFile))
 
-    return data
+        return data
+    except Exception as e:
+        print('Error read %s. %s' % (configFile, e))
+        sys.exit(1)
 
 def writeConfig(data):
-    with open(configFile, 'wt') as outfile:
-        json.dump(data, outfile, sort_keys=True, indent=4, separators=(',', ': '))
+    try:
+        with open(configFile, 'wt') as outfile:
+            json.dump(
+                data,
+                outfile,
+                sort_keys=True,
+                indent=4,
+                separators=(',', ': ')
+            )
+    except Exception as e:
+        print('Error write %s. %s' % (configFile, e))
+        sys.exit(1)
+
 
 def main():
     if len(sys.argv) < 2:
