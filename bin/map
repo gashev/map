@@ -7,6 +7,10 @@ import sys
 
 configFile = os. environ['HOME'] + '/.map'
 
+def export(data):
+    for key in data:
+        print "declare -x %s=\"%s\"" % (key, ' '.join(data[key]))
+
 def help():
     print
     print "Usage: map <command> <list> [<item>] ..."
@@ -49,7 +53,10 @@ def main():
 
     if command == 'show':
         print ' '.join(data[name])
-        
+
+    if command == 'export':
+        export(data)
+
     if command == 'help':
         help()
 
