@@ -15,6 +15,16 @@ commands = {
     'show': 'show details from list'
 }
 
+def add(data, args):
+    name = args[2]
+    if name not in data:
+        data[name] = []
+    values = args[3:]
+    for value in values:
+        if value not in data[name]:
+            data[name].append(value)
+    print(' '.join(data[name]))
+
 def export(data):
     for key in data:
         print("declare -x %s=\"%s\"" % (key, ' '.join(data[key])))
@@ -42,11 +52,7 @@ def main():
         data = json.load(open(configFile))
 
     if command == 'add':
-        if name not in data:
-            data[name] = []
-        if value not in data[name]:
-            data[name].append(value)
-        print(' '.join(data[name]))
+        add(data, sys.argv)
 
     if command == 'delete':
         if name in data and value in data[name]:
