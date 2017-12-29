@@ -1,15 +1,17 @@
-Paths mapping tool.
+# Paths mapping tool.
 
-Usage: map <command> <list> [<item>] ...
+.. code:: bash
 
-Commands:
-  add      add item to list
-  delete   delete item from list
-  destroy  destroy list
-  show     show details about list
+    Usage: map <command> <list> [<item>] ...
+
+    Commands:
+      add      add item to list
+      delete   delete item from list
+      destroy  destroy list
+      show     show details about list
 
 
-Examples:
+# Examples:
 
 .. code:: bash
 
