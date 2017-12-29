@@ -55,6 +55,17 @@ def help():
     for command in commandNames:
         print('  %-12s%s' % (command, commands[command]))
 
+def readConfig():
+    data = {}
+    if os.path.exists(configFile):
+        data = json.load(open(configFile))
+
+    return data
+
+def writeConfig(data):
+    with open(configFile, 'wt') as outfile:
+        json.dump(data, outfile, sort_keys=True, indent=4, separators=(',', ': '))
+
 def main():
     command = sys.argv[1]
     name = None
@@ -64,9 +75,7 @@ def main():
     if len(sys.argv) == 4:
         value = sys.argv[3]
 
-    data = {}
-    if os.path.exists(configFile):
-        data = json.load(open(configFile))
+    data = readConfig()
 
     if command == 'add':
         add(data, sys.argv)
@@ -86,9 +95,7 @@ def main():
     if command == 'help':
         help()
 
-    with open(configFile, 'wt') as outfile:
-        json.dump(data, outfile, sort_keys=True, indent=4, separators=(',', ': '))
-
+    writeConfig(data)
 
 if __name__== "__main__":
     main()
