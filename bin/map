@@ -17,20 +17,16 @@ commands = {
 
 def export(data):
     for key in data:
-        print "declare -x %s=\"%s\"" % (key, ' '.join(data[key]))
+        print("declare -x %s=\"%s\"" % (key, ' '.join(data[key])))
 
 def help():
-    print
-    print "Usage: map <command> <list> [<item>] ..."
-    print
-    print "Paths mapping tool."
-    print
-    print "Commands:"
+    print("\nUsage: map <command> <list> [<item>] ...")
+    print("\nPaths mapping tool.")
+    print("\nCommands:")
 
-    commandNames = commands.keys()
-    commandNames.sort()
+    commandNames = sorted(commands.keys())
     for command in commandNames:
-        print '  %-12s%s' % (command, commands[command])
+        print('  %-12s%s' % (command, commands[command]))
 
 def main():
     command = sys.argv[1]
@@ -50,7 +46,7 @@ def main():
             data[name] = []
         if value not in data[name]:
             data[name].append(value)
-        print ' '.join(data[name])
+        print(' '.join(data[name]))
 
     if command == 'delete':
         if name in data and value in data[name]:
@@ -61,7 +57,7 @@ def main():
             data.pop(name)
 
     if command == 'show':
-        print ' '.join(data[name])
+        print(' '.join(data[name]))
 
     if command == 'export':
         export(data)
