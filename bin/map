@@ -37,6 +37,11 @@ def delete(data, args):
 
     print(' '.join(data[name]))
 
+def destroy(data, args):
+    name = args[2]
+    if name in data:
+        data.pop(name)
+
 def export(data):
     for key in data:
         print("declare -x %s=\"%s\"" % (key, ' '.join(data[key])))
@@ -70,8 +75,7 @@ def main():
         delete(data, sys.argv)
 
     if command == 'destroy':
-        if name in data:
-            data.pop(name)
+        destroy(data, sys.argv)
 
     if command == 'show':
         print(' '.join(data[name]))
