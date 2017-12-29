@@ -3,11 +3,17 @@
     Usage: map <command> <list> [<item>] ...
 
     Commands:
-      add      add item to list
-      delete   delete item from list
-      destroy  destroy list
-      show     show details about list
+      add         add item to list
+      delete      delete item from list
+      destroy     destroy list
+      export      export to bash code
+      show        show details from list
 
+Export lists to bash code:
+
+    $ ./map export
+    declare -x logs="/var/log/messages /var/log/secure /var/log/maillog"
+    declare -x servers="master node-1 node-2"
 
 # Examples
 
