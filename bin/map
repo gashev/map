@@ -7,17 +7,30 @@ import sys
 
 configFile = os. environ['HOME'] + '/.map'
 
+def help():
+    print
+    print "Usage: map <command> <list> [<item>] ..."
+    print
+    print "Paths mapping tool."
+    print
+    print "Commands:"
+    print "  add      add item to list"
+    print "  delete   delete item from list"
+    print "  destroy  destroy list"
+
 def main():
     command = sys.argv[1]
-    name = sys.argv[2]
+    name = None
+    if len(sys.argv) > 2:
+        name = sys.argv[2]
     value = None
     if len(sys.argv) == 4:
         value = sys.argv[3]
 
     data = {}
     if os.path.exists(configFile):
-        data = json.load(open(configFile))  
-    
+        data = json.load(open(configFile))
+
     if command == 'add':
         if name not in data:
             data[name] = []
@@ -32,6 +45,9 @@ def main():
     if command == 'destroy':
         if name in data:
             data.pop(name)
+
+    if command == 'help':
+        help()
 
     with open(configFile, 'wt') as outfile:
         json.dump(data, outfile, sort_keys=True, indent=4, separators=(',', ': '))
