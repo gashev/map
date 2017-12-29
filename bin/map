@@ -107,5 +107,7 @@ def main():
     if command == 'help':
         return help(sys.argv)
 
+    print('ERROR: %s command was not implemented.' % (command))
+
 if __name__== "__main__":
     main()
