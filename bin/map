@@ -15,8 +15,9 @@ commands = {
     'show': 'show details from list'
 }
 
-def add(data, args):
+def add(args):
     name = args[2]
+    data = readConfig()
     if name not in data:
         data[name] = []
     values = args[3:]
@@ -24,9 +25,11 @@ def add(data, args):
         if value not in data[name]:
             data[name].append(value)
     print(' '.join(data[name]))
+    writeConfig(data)
 
-def delete(data, args):
+def delete(args):
     name = args[2]
+    data = readConfig()
     if name not in data:
         return
 
@@ -36,17 +39,21 @@ def delete(data, args):
             data[name].remove(value)
 
     print(' '.join(data[name]))
+    writeConfig(data)
 
-def destroy(data, args):
+def destroy(args):
     name = args[2]
+    data = readConfig()
     if name in data:
         data.pop(name)
+        writeConfig(data)
 
-def export(data):
+def export(args):
+    data = readConfig()
     for key in data:
         print("declare -x %s=\"%s\"" % (key, ' '.join(data[key])))
 
-def help():
+def help(args):
     print("\nUsage: map <command> <list> [<item>] ...")
     print("\nPaths mapping tool.")
     print("\nCommands:")
@@ -54,6 +61,11 @@ def help():
     commandNames = sorted(commands.keys())
     for command in commandNames:
         print('  %-12s%s' % (command, commands[command]))
+
+def show(args):
+    name = args[2]
+    data = readConfig()
+    print(' '.join(data[name]))
 
 def readConfig():
     data = {}
@@ -67,35 +79,33 @@ def writeConfig(data):
         json.dump(data, outfile, sort_keys=True, indent=4, separators=(',', ': '))
 
 def main():
-    command = sys.argv[1]
-    name = None
-    if len(sys.argv) > 2:
-        name = sys.argv[2]
-    value = None
-    if len(sys.argv) == 4:
-        value = sys.argv[3]
+    if len(sys.argv) < 2:
+        print('ERROR: command not found.')
+        return help(sys.argv)
 
-    data = readConfig()
+    command = sys.argv[1]
+
+    if command not in commands.keys():
+        print('ERROR: %s command not found.' % (command))
+        return help(sys.argv)
 
     if command == 'add':
-        add(data, sys.argv)
+        return add(sys.argv)
 
     if command == 'delete':
-        delete(data, sys.argv)
+        return delete(sys.argv)
 
     if command == 'destroy':
-        destroy(data, sys.argv)
+        return destroy(sys.argv)
 
     if command == 'show':
-        print(' '.join(data[name]))
+        return show(sys.argv)
 
     if command == 'export':
-        export(data)
+        return export(sys.argv)
 
     if command == 'help':
-        help()
-
-    writeConfig(data)
+        return help(sys.argv)
 
 if __name__== "__main__":
     main()
