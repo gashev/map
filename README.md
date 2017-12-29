@@ -9,14 +9,13 @@
       show     show details about list
 
 
-# Examples:
+# Examples
 
 Read logs:
 
     # map add logs /var/log/messages
     # map add logs /var/log/secure
     # tail -f $logs
-
 
 Start servers:
 
