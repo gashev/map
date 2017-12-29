@@ -1,5 +1,6 @@
 # Paths mapping tool.
 
+
 .. code:: bash
 
     Usage: map <command> <list> [<item>] ...
@@ -12,6 +13,17 @@
 
 
 # Examples:
+
+Read logs:
+
+.. code:: bash
+
+    # map add logs /var/log/messages
+    # map add logs /var/log/secure
+    # tail -f $logs
+
+
+Start servers:
 
 .. code:: bash
 
