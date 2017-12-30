@@ -47,6 +47,6 @@ setup(
     py_modules=["map"],
     keywords='paths mapping',
     install_requires=INSTALL_REQUIRES,
-    scripts=['bin/map', 'bin/map.sh']
+    scripts=['bin/map.py', 'bin/map.sh']
 )
 
