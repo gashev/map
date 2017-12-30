@@ -1,5 +1,12 @@
 # Paths mapping tool.
 
+# Installation
+
+Add the command `source map.sh` to your shell startup file and reload the
+shell.
+
+# Usage
+
     Usage: map <command> <list> [<item>] ...
 
     Commands:
