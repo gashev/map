@@ -1,3 +1,9 @@
+function map_initialize() {
+    file=$(mktemp)
+    ./map export 1>$file
+    source $file
+    rm -f $file
+}
 
 function map() {
 	if [ "x$1" == 'xadd' ] ; then
@@ -11,3 +17,5 @@ function map() {
 		unset $2
 	fi
 }
+
+map_initialize

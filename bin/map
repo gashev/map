@@ -51,7 +51,7 @@ def destroy(args):
 def export(args):
     data = readConfig()
     for key in data:
-        print("declare -x %s=\"%s\"" % (key, ' '.join(data[key])))
+        print("export %s=\"%s\"" % (key, ' '.join(data[key])))
 
 def help(args):
     print("\nUsage: map <command> <list> [<item>] ...")
