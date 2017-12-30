@@ -16,7 +16,18 @@ shell.
       export      export to bash code
       show        show details from list
 
-Export lists to bash code:
+## Add item to list
+
+Create logs list and add two files to logs list:
+
+    # map add logs /var/log/messages
+    # map add logs /var/log/secure
+
+The same:
+
+    # map add logs /var/log/messages /var/log/secure
+
+## Export lists to bash code:
 
     $ ./map export
     declare -x logs="/var/log/messages /var/log/secure /var/log/maillog"
