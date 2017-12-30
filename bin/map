@@ -5,7 +5,7 @@ import os
 import os.path
 import sys
 
-configFile = os. environ['HOME'] + '/.map'
+configFile = os.environ['HOME'] + '/.map'
 
 commands = {
     'add' : 'add item to list',
