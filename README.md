@@ -36,4 +36,5 @@ Start servers:
     $ map add servers node-1
     $ map add servers node-2
     $ openstack server start $servers
+    $ openstack server stop $servers
 
